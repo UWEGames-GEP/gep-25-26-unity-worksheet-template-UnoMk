@@ -17,6 +17,17 @@ public class Inventory : MonoBehaviour
         items.Remove(itemName);
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Items collisionItem = hit.gameObject.GetComponent<Items>();
+
+        if (collisionItem != null)
+        {
+            items.Add(collisionItem.name);
+            Destroy(collisionItem.gameObject);
+        }
+    }
+
     void Start()
     {
     }
@@ -28,6 +39,7 @@ public class Inventory : MonoBehaviour
             return;
         }
 
+        /*
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             AddItem("Generic Item");
@@ -36,5 +48,7 @@ public class Inventory : MonoBehaviour
         {
             RemoveItem("Generic Item");
         }
+        */
+
     }
 }
