@@ -9,11 +9,14 @@ public class GameManager : MonoBehaviour
 
     public GameState state;
 
+    public GameObject inventoryUI;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         state = GameState.GAMEPLAY;
         hasChangedState = false;
+        inventoryUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -46,10 +49,14 @@ public class GameManager : MonoBehaviour
             if (state == GameState.GAMEPLAY)
             {
                 Time.timeScale = 1.0f;
+                inventoryUI.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
             }
             else if (state == GameState.PAUSE)
             {
                 Time .timeScale = 0.0f;
+                inventoryUI.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
             }
         }
     }

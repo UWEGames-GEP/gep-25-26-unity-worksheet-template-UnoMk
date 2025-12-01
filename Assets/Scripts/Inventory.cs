@@ -16,7 +16,19 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(Items item)
     {
+        Vector3 currentPosition = transform.position;
+        Vector3 forward = transform.forward;
+        Vector3 newPosition = currentPosition + forward;
+        newPosition += new Vector3(0, 1, 0);
+
+        Quaternion currentRotation = transform.rotation;
+        Quaternion newRotation = currentRotation * Quaternion.Euler(0, 0, 180);
+
+        GameObject newItem = Instantiate(item.gameObject, newPosition, newRotation, worldItemsTransform);
+        newItem.SetActive(true);
+
         items.Remove(item);
+        Destroy(item.gameObject);
     }
 
     public void RemoveItem()
@@ -25,19 +37,15 @@ public class Inventory : MonoBehaviour
         {
             Items item = items[0];
 
-            Vector3 currentPosition = transform.position;
-            Vector3 forward = transform.forward;
-            Vector3 newPosition = currentPosition + forward;
-            newPosition += new Vector3(0, 1, 0);
+            RemoveItem(item);
+        }
+    }
 
-            Quaternion currentRotation = transform.rotation;
-            Quaternion newRotation = currentRotation * Quaternion.Euler(0, 0, 180);
-
-            GameObject newItem = Instantiate(item.gameObject, newPosition, newRotation, worldItemsTransform);
-            newItem.SetActive(true);
-
-            items.Remove(item);
-            Destroy(item.gameObject);
+    public void RemoveItem(int i)
+    {
+        if (i < items.Count)
+        {
+            RemoveItem(items[i]);
         }
     }
 
