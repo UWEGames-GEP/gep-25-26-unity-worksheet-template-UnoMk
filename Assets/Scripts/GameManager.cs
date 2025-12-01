@@ -17,25 +17,25 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (state == GameState.GAMEPLAY)
-        {
-            if (Input.GetKeyUp(KeyCode.Return))
-            {
-                state = GameState.PAUSE;
-                hasChangedState = true;
-            }
-        }
-        else if (state == GameState.PAUSE)
-        {
-            if (Input.GetKeyUp(KeyCode.Return))
-            {
-                state = GameState.GAMEPLAY;
-                hasChangedState = true;
-            }
-        }
-    }
+    //void Update()
+    //{
+    //    if (state == GameState.GAMEPLAY)
+    //    {
+    //        if (Input.GetKeyUp(KeyCode.Return))
+    //        {
+    //            state = GameState.PAUSE;
+    //            hasChangedState = true;
+    //        }
+    //    }
+    //    else if (state == GameState.PAUSE)
+    //    {
+    //        if (Input.GetKeyUp(KeyCode.Return))
+    //        {
+    //            state = GameState.GAMEPLAY;
+    //            hasChangedState = true;
+    //        }
+    //    }
+    //}
 
     private void LateUpdate()
     {
@@ -51,6 +51,20 @@ public class GameManager : MonoBehaviour
             {
                 Time .timeScale = 0.0f;
             }
+        }
+    }
+
+    public void Pausing()
+    {
+        if (state == GameState.GAMEPLAY)
+        {
+            state = GameState.PAUSE;
+            hasChangedState = true;
+        }
+        else if (state == GameState.PAUSE)
+        {
+            state = GameState.GAMEPLAY;
+            hasChangedState = true;
         }
     }
 
